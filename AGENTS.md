@@ -5,6 +5,7 @@ The owner doesn't edit code by hand; AI agents do nearly all the maintenance. Ke
 ## Stack
 
 - Astro 7, fully static output (`dist/`). No server adapter, no UI framework, no Tailwind.
+- Hosted on Cloudflare Workers as static assets (`wrangler.jsonc`). Pushing to `main` builds (`npm run build`) and deploys (`npx wrangler deploy`). Node version is pinned in `.node-version`.
 - Plain CSS: global tokens and base styles in `src/styles/global.css`, component styles in each `.astro` file's `<style>` block.
 - Fonts are self-hosted via `@fontsource-variable/*` (Newsreader + JetBrains Mono). Don't add runtime font or CDN requests.
 - Don't add dependencies without a clear reason; prefer a few lines of code.
