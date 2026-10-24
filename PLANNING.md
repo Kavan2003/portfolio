@@ -6,7 +6,7 @@ This file collects what we've agreed before any code gets written. It's a workin
 
 - **Long-term:** build a personal presence that points toward a Product Manager role. Not job-hunting yet.
 - **Today:** Product Analyst, with little published work so far. The plan is to start writing and building in public.
-- **Domain:** `tkavan.com`, bought on Cloudflare. Hosting will be on Cloudflare too (Pages or Workers).
+- **Domain:** `tkavan.com`, bought on Cloudflare. **Live since 2026-10-25** on Cloudflare Workers (static assets), deploying from github.com/Kavan2003/portfolio on every push to `main`. `www.tkavan.com` serves the same site.
 
 ## Inspiration: what each site does
 
