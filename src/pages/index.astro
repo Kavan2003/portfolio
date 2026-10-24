@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import portrait from '../assets/portrait.jpg';
 import EntryList from '../components/EntryList.astro';
 import SectionHead from '../components/SectionHead.astro';
 import { getPublished } from '../lib/content';
@@ -15,10 +17,16 @@ const notes = (await getPublished('notes')).slice(0, 5);
 			{SITE.name} · {SITE.role} at <a href={SITE.company.url}>{SITE.company.name}</a>
 		</p>
 		<h1>{SITE.headline}</h1>
-		<!--
-			Phase 2: the portrait / 3D avatar goes beside the headline on wide
-			screens. Add it as a second column in .hero (see PLANNING.md).
-		-->
+		<!-- Phase 2: the 3D avatar replaces this portrait (see PLANNING.md). -->
+		<Image
+			class="portrait"
+			src={portrait}
+			alt={SITE.name}
+			widths={[240, 360, 480, 720]}
+			sizes="(max-width: 40rem) 9rem, 20rem"
+			loading="eager"
+			fetchpriority="high"
+		/>
 		<div class="bio">
 			<p>
 				I'm Kavan, a {SITE.role} at {SITE.company.name}. Most of my work is spotting where people on our
@@ -59,7 +67,28 @@ const notes = (await getPublished('notes')).slice(0, 5);
 
 <style>
 	.hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(14rem, 20rem);
+		grid-template-areas:
+			'kicker portrait'
+			'title  portrait'
+			'bio    bio';
+		column-gap: var(--space-6);
 		padding-top: clamp(var(--space-6), 10vw, var(--space-12));
+	}
+
+	.kicker {
+		grid-area: kicker;
+	}
+
+	.portrait {
+		grid-area: portrait;
+		align-self: end;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		border-radius: 4px;
 	}
 
 	.kicker a {
@@ -72,6 +101,7 @@ const notes = (await getPublished('notes')).slice(0, 5);
 	}
 
 	h1 {
+		grid-area: title;
 		margin-top: var(--space-3);
 		font-size: var(--text-display);
 		font-weight: 400;
@@ -81,6 +111,7 @@ const notes = (await getPublished('notes')).slice(0, 5);
 	}
 
 	.bio {
+		grid-area: bio;
 		margin-top: var(--space-6);
 		margin-left: var(--margin-col);
 		max-width: var(--measure);
@@ -94,6 +125,22 @@ const notes = (await getPublished('notes')).slice(0, 5);
 
 	.block {
 		margin-top: var(--space-12);
+	}
+
+	@media (max-width: 48rem) {
+		.hero {
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-areas:
+				'kicker'
+				'title'
+				'portrait'
+				'bio';
+		}
+
+		.portrait {
+			width: 9rem;
+			margin-top: var(--space-4);
+		}
 	}
 
 	@media (max-width: 40rem) {
