@@ -9,6 +9,7 @@ The owner doesn't edit code by hand; AI agents do nearly all the maintenance. Ke
 - Plain CSS: global tokens and base styles in `src/styles/global.css`, component styles in each `.astro` file's `<style>` block.
 - Fonts are self-hosted via `@fontsource-variable/*` (Newsreader + JetBrains Mono). Don't add runtime font or CDN requests.
 - Don't add dependencies without a clear reason; prefer a few lines of code.
+- Cloudflare installs with npm 10 (`npm ci`). After any dependency change, refresh the lock file with `npx npm@10 install` and check `npx npm@10 ci --dry-run` passes; a lock file written only by npm 11 can fail there.
 
 ## Where things live
 
