@@ -58,7 +58,7 @@ Early ideas to discuss (nothing decided):
 
 - LinkedIn: https://www.linkedin.com/in/kavanthosani/
 - GitHub: https://github.com/Kavan2003
-- Email: hello@tkavan.com (needs Cloudflare Email Routing to forward it to a real inbox, if it isn't set up yet)
+- Email: hello@tkavan.com (Cloudflare Email Routing is already set up)
 
 ## Teardown backlog
 
