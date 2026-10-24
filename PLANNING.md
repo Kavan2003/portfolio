@@ -68,7 +68,7 @@ Early ideas to discuss (nothing decided):
 
 ## Later / phase 2
 
-- **Portrait photo:** added to the home hero (`src/assets/portrait.jpg`, cropped 4:5, metadata stripped). _Done._
+- **Portrait photo:** on the home hero as a circle with a soft, blended edge and a warm, muted tone so it matches the paper-and-ink palette (`src/assets/portrait.jpg`, square crop, metadata stripped). _Done._
 - **3D avatar:** a realistic 3D avatar of Kavan that waves hi and follows the cursor. It's feasible with three.js and a rigged avatar model. Trade-offs: a few MB of page weight, slower first load, and it needs a fallback for mobile and reduced-motion users. Plan: launch without it, keep the hero layout ready for it, and build it as its own project.
 
 ## Site map (v1)

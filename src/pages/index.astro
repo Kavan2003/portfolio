@@ -81,14 +81,18 @@ const notes = (await getPublished('notes')).slice(0, 5);
 		grid-area: kicker;
 	}
 
+	/* Circle with a soft edge that fades into the page in either theme, and a
+	   warm, muted tone so the photo sits with the paper-and-ink palette. */
 	.portrait {
 		grid-area: portrait;
-		align-self: end;
+		align-self: center;
 		width: 100%;
 		height: auto;
-		aspect-ratio: 4 / 5;
+		aspect-ratio: 1;
 		object-fit: cover;
-		border-radius: 4px;
+		-webkit-mask-image: radial-gradient(closest-side, #000 66%, transparent 100%);
+		mask-image: radial-gradient(closest-side, #000 66%, transparent 100%);
+		filter: saturate(0.72) sepia(0.14) contrast(1.03);
 	}
 
 	.kicker a {
@@ -138,8 +142,8 @@ const notes = (await getPublished('notes')).slice(0, 5);
 		}
 
 		.portrait {
-			width: 9rem;
-			margin-top: var(--space-4);
+			width: 11rem;
+			margin-top: var(--space-3);
 		}
 	}
 
