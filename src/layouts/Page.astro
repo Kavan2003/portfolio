@@ -1,0 +1,44 @@
+---
+// Layout for plain Markdown pages in src/pages (about.md, now.md).
+// Frontmatter: title, label, description?, updated? (shown as "Last updated").
+import Base from './Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import { formatDate } from '../lib/content';
+
+const { frontmatter } = Astro.props;
+const updated = frontmatter.updated ? new Date(frontmatter.updated) : undefined;
+---
+
+<Base title={frontmatter.label} description={frontmatter.description}>
+	<PageIntro label={frontmatter.label} title={frontmatter.title} />
+	<div class="wrap">
+		<div class="prose">
+			<slot />
+		</div>
+		{
+			updated && (
+				<p class="label updated">
+					Last updated <time datetime={updated.toISOString()}>{formatDate(updated)}</time>
+				</p>
+			)
+		}
+	</div>
+</Base>
+
+<style>
+	.prose,
+	.updated {
+		margin-left: var(--margin-col);
+	}
+
+	.updated {
+		margin-top: var(--space-6);
+	}
+
+	@media (max-width: 40rem) {
+		.prose,
+		.updated {
+			margin-left: 0;
+		}
+	}
+</style>

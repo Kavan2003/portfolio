@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import EntryList from '../../components/EntryList.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { getPublished } from '../../lib/content';
+
+const notes = await getPublished('notes');
+---
+
+<Base title="Notes" description="A public notebook: short, rough notes on product and what I'm learning.">
+	<PageIntro label="Notes" title="A public notebook.">
+		Short and unpolished on purpose. Things I noticed at work, in a product, or in something I read. Written
+		to think, not to impress.
+	</PageIntro>
+	<section class="wrap">
+		<EntryList
+			entries={notes}
+			base="/notes"
+			digits={3}
+			emptyText="The notebook is open. First entries land soon."
+		/>
+	</section>
+</Base>

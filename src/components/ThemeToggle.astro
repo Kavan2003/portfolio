@@ -1,0 +1,42 @@
+<button class="toggle label" type="button" data-theme-toggle>
+	<span data-theme-label>Theme</span>
+</button>
+
+<script>
+	const button = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+	const label = document.querySelector<HTMLElement>('[data-theme-label]');
+	const root = document.documentElement;
+
+	function render() {
+		const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+		if (label) label.textContent = next === 'dark' ? 'Dark' : 'Light';
+		button?.setAttribute('aria-label', `Switch to ${next} theme`);
+	}
+
+	button?.addEventListener('click', () => {
+		const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+		root.dataset.theme = next;
+		try {
+			localStorage.setItem('theme', next);
+		} catch {}
+		render();
+	});
+
+	render();
+</script>
+
+<style>
+	.toggle {
+		background: none;
+		border: 1px solid var(--rule);
+		border-radius: 999px;
+		padding: 0.45rem 0.9rem;
+		min-height: 2.25rem;
+		cursor: pointer;
+	}
+
+	.toggle:hover {
+		color: var(--ink);
+		border-color: var(--ink-muted);
+	}
+</style>

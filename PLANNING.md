@@ -41,7 +41,7 @@ Early ideas to discuss (nothing decided):
 - **Home page:** a short, bold one-line point of view (the Kawal touch), then a short bio that owns the analyst-to-PM, learning-in-public story, then the latest teardowns and notes (the Arpit structure). _Agreed._
 - **Stack:** Astro as a static site, on Cloudflare Pages, deployed on push to GitHub. Markdown posts, almost no JavaScript, free hosting. _Agreed._
 - **Launch sections:** Home, Teardowns, Notes, About/Now. Add Bookshelf, Projects and the rest only once they have content. _Agreed._
-- **Look:** no strong dislikes, so it's our call. Direction: an editorial serif for headlines with a clean sans for body text. Light and dark modes. One accent colour. Generous whitespace.
+- **Look:** "analyst's notebook". Newsreader serif for the writing, JetBrains Mono for labels, dates and numerals (the analyst side). One accent colour (red editor's pen) on warm paper. Light and dark modes. Signature element: oversized index numerals on every entry, with planned teardowns shown as outlined "up next" numbers. _Built in v1._
 
 ## About Kavan
 

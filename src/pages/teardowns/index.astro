@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import EntryList from '../../components/EntryList.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import { getPublished } from '../../lib/content';
+import { UP_NEXT_TEARDOWNS } from '../../site';
+
+const teardowns = await getPublished('teardowns');
+---
+
+<Base title="Teardowns" description="Product teardowns: how good products are built, and why.">
+	<PageIntro label="Teardowns" title="How good products are built, and why.">
+		Long-form breakdowns of real products: the bets they made, the trade-offs behind them, and what a PM
+		can take from each.
+	</PageIntro>
+	<section class="wrap">
+		<EntryList entries={teardowns} base="/teardowns" upcoming={UP_NEXT_TEARDOWNS} />
+	</section>
+</Base>

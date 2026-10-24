@@ -1,0 +1,46 @@
+---
+interface Props {
+	title: string;
+	note?: string;
+	link?: { href: string; label: string };
+}
+
+const { title, note, link } = Astro.props;
+---
+
+<div class="head">
+	<h2 class="label">{title}</h2>
+	{note && <p class="note">{note}</p>}
+	{link && <a class="label more" href={link.href}>{link.label} →</a>}
+</div>
+
+<style>
+	.head {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: var(--space-1) var(--space-3);
+		margin-bottom: var(--space-2);
+	}
+
+	h2 {
+		color: var(--ink);
+		font-weight: 600;
+		line-height: 1.6;
+	}
+
+	.note {
+		color: var(--ink-muted);
+		font-style: italic;
+		font-size: var(--text-base);
+	}
+
+	.more {
+		margin-left: auto;
+		text-decoration: none;
+	}
+
+	.more:hover {
+		color: var(--accent);
+	}
+</style>

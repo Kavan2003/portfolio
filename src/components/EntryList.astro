@@ -1,0 +1,144 @@
+---
+// A numbered list of entries: the site's signature element.
+// Published entries link out; `upcoming` titles continue the numbering, unlinked.
+import { formatDate, pad, type Numbered } from '../lib/content';
+
+interface Props {
+	entries: Numbered<'teardowns'>[] | Numbered<'notes'>[];
+	base: '/teardowns' | '/notes';
+	digits?: number;
+	upcoming?: readonly string[];
+	emptyText?: string;
+}
+
+const { entries, base, digits = 2, upcoming = [], emptyText } = Astro.props;
+const total = Math.max(0, ...entries.map((e) => e.number));
+const upcomingItems = [...upcoming].map((title, i) => ({ title, number: total + i + 1 }));
+---
+
+{
+	entries.length === 0 && upcomingItems.length === 0 && emptyText && (
+		<p class="empty">{emptyText}</p>
+	)
+}
+
+<ol class="entries" role="list">
+	{
+		entries.map((entry) => (
+			<li class="entry">
+				<span class="num" aria-hidden="true">
+					{pad(entry.number, digits)}
+				</span>
+				<div class="body">
+					<h3 class="title">
+						<a href={`${base}/${entry.id}`}>{entry.data.title}</a>
+					</h3>
+					{entry.data.description && <p class="desc">{entry.data.description}</p>}
+					<p class="label">
+						<time datetime={entry.data.date.toISOString()}>{formatDate(entry.data.date)}</time>
+						{entry.data.draft && <span class="draft">Draft</span>}
+					</p>
+				</div>
+			</li>
+		))
+	}
+	{
+		upcomingItems.map((item) => (
+			<li class="entry upcoming">
+				<span class="num" aria-hidden="true">
+					{pad(item.number, digits)}
+				</span>
+				<div class="body">
+					<h3 class="title">{item.title}</h3>
+					<p class="label">Up next</p>
+				</div>
+			</li>
+		))
+	}
+</ol>
+
+<style>
+	.entries {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.entry {
+		display: grid;
+		grid-template-columns: var(--margin-col) minmax(0, var(--measure));
+		align-items: baseline;
+		padding-block: var(--space-4);
+		border-top: 1px solid var(--rule);
+	}
+
+	.entry:last-child {
+		border-bottom: 1px solid var(--rule);
+	}
+
+	.num {
+		font-family: var(--font-mono);
+		font-size: clamp(2.5rem, 6vw, 4.5rem);
+		font-weight: 300;
+		line-height: 0.9;
+		letter-spacing: -0.04em;
+		color: var(--accent);
+		font-variant-numeric: tabular-nums;
+	}
+
+	.title {
+		font-size: var(--text-xl);
+	}
+
+	.title a {
+		text-decoration: none;
+	}
+
+	.title a:hover {
+		text-decoration: underline;
+		text-decoration-color: var(--accent);
+		text-decoration-thickness: 2px;
+	}
+
+	.desc {
+		margin-top: var(--space-1);
+		color: var(--ink-muted);
+	}
+
+	.label {
+		margin-top: var(--space-2);
+	}
+
+	.draft {
+		margin-left: var(--space-2);
+		color: var(--accent);
+	}
+
+	/* Planned entries: numeral as an outline, text quieter */
+	.upcoming .num {
+		color: transparent;
+		-webkit-text-stroke: 1px var(--ink-muted);
+	}
+
+	.upcoming .title {
+		color: var(--ink-muted);
+	}
+
+	.empty {
+		color: var(--ink-muted);
+		font-style: italic;
+		padding-block: var(--space-4);
+		border-block: 1px solid var(--rule);
+	}
+
+	@media (max-width: 40rem) {
+		.entry {
+			grid-template-columns: 1fr;
+			gap: var(--space-1);
+		}
+
+		.title {
+			font-size: var(--text-lg);
+		}
+	}
+</style>
