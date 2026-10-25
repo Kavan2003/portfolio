@@ -15,6 +15,20 @@ interface Props {
 const { title, description = SITE.description } = Astro.props;
 const fullTitle = title ? `${title} · ${SITE.name}` : `${SITE.name} · ${SITE.headline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+
+// Structured data so search engines and AI assistants can tie this site to
+// the same person as the LinkedIn and GitHub profiles.
+const personSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: SITE.name,
+	url: SITE.url,
+	email: `mailto:${SITE.email}`,
+	jobTitle: SITE.role,
+	worksFor: { '@type': 'Organization', name: SITE.company.name, url: SITE.company.url },
+	description: SITE.description,
+	sameAs: SITE.links.map((link) => link.href),
+};
 ---
 
 <!doctype html>
@@ -32,6 +46,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content={SITE.name} />
+		<meta name="author" content={SITE.name} />
+		<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 		<meta name="theme-color" content="#f5f3ee" media="(prefers-color-scheme: light)" />
 		<meta name="theme-color" content="#151412" media="(prefers-color-scheme: dark)" />
 		<!-- Set the theme before first paint so there is no flash. -->
