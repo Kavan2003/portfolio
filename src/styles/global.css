@@ -152,6 +152,10 @@ a:hover {
 	margin-top: 2em;
 }
 
+.prose > :is(h2, h3):first-child {
+	margin-top: 0;
+}
+
 .prose h3 {
 	font-size: var(--text-lg);
 	margin-top: 1.6em;
