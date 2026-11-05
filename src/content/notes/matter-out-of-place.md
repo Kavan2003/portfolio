@@ -1,5 +1,5 @@
 ---
-title: "The out of place"
+title: "Matter out of place"
 description: "Products have dirt too."
 date: 2026-11-06
 ---
