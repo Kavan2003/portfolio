@@ -26,7 +26,6 @@ export const NAV = [
 // Teardowns that are planned but not yet published. They show as numbered
 // "up next" entries after the published ones. When you publish one, remove it here.
 export const UP_NEXT_TEARDOWNS = [
-	'Cursor vs VS Code: how a fork beat the default editor',
 	'The AI model market: where Claude, Gemini and the rest are heading',
 	'Duolingo: winning a market full of look-alikes',
 ];
